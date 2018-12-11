@@ -53,6 +53,7 @@ enum Direction : int {  //enum defining cardinal bitboard directions
 	NORTH_WEST = 7,
 	SOUTH_EAST = -7,
 	SOUTH_WEST = -9
+	
 };
 
 

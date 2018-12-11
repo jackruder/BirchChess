@@ -1,7 +1,7 @@
 #pragma once
 #include "bbtypes.h"
 #include <iostream>
-//defining bitboards and bitboard operations
+//defining const bitboards, masks, and bitboard operations
 
 namespace BitBoards
 {
@@ -13,24 +13,13 @@ namespace BitBoards
 	constexpr BitBoard WHITESQUARES = 0x55AA55AA55AA55AAULL;
 
 	//Files
-	constexpr BitBoard FILE_ABB = 0x0101010101010101ULL;
-	constexpr BitBoard FILE_BBB = FILE_ABB << 1;
-	constexpr BitBoard FILE_CBB = FILE_ABB << 2;
-	constexpr BitBoard FILE_DBB = FILE_ABB << 3;
-	constexpr BitBoard FILE_EBB = FILE_ABB << 4;
-	constexpr BitBoard FILE_FBB = FILE_ABB << 5;
-	constexpr BitBoard FILE_GBB = FILE_ABB << 6;
-	constexpr BitBoard FILE_HBB = FILE_ABB << 7;
+	constexpr BitBoard BBFILE_A = 0x0101010101010101ULL;
+	constexpr BitBoard BBFILE_NOT_A = ~BBFILE_A;
+	constexpr BitBoard BBFILE_NOT_H = ~(BBFILE_A << 7);
 
-	//RANKSS 
-	constexpr BitBoard RANK_1BB = 0x00000000000000FFULL;
-	constexpr BitBoard RANK_2BB = RANK_1BB << (8 * 1);
-	constexpr BitBoard RANK_3BB = RANK_1BB << (8 * 2);
-	constexpr BitBoard RANK_4BB = RANK_1BB << (8 * 3);
-	constexpr BitBoard RANK_5BB = RANK_1BB << (8 * 4);
-	constexpr BitBoard RANK_6BB = RANK_1BB << (8 * 5);
-	constexpr BitBoard RANK_7BB = RANK_1BB << (8 * 6);
-	constexpr BitBoard RANK_8BB = RANK_1BB << (8 * 7);
+
+	//RANKS
+	constexpr BitBoard BBRANK_1 = 0x00000000000000FFULL;
 										
 
 	//bitboard constants defining starting pieces
@@ -57,43 +46,92 @@ namespace BitBoards
 	extern BitBoard SWMASK[NUM_SQUARES];
 	extern BitBoard SEMASK[NUM_SQUARES];
 	
-	extern BitBoard RANKSMASK[NUM_SQUARES];
+	extern BitBoard RANKMASK[NUM_SQUARES];
 	extern BitBoard FILEMASK[NUM_SQUARES];
 	extern BitBoard DIAGONALMASK[NUM_SQUARES];
 	extern BitBoard ANTIMASK[NUM_SQUARES];
+	extern uint8_t FIRSTRANKATTACKS[64*8];
+
+	//extern BitBoard ROOKMASKS[NUM_SQUARES];
+	//extern BitBoard BISHOPMASKS[NUM_SQUARES];
+	//extern BitBoard QUEENMASKS[NUM_SQUARES];
+	
+	BitBoard removeSideBorder(BitBoard b);
+	BitBoard removeTopBorder(BitBoard b);
+	BitBoard removeBorder(BitBoard b);
 
 	void fillNorth();
 	void fillSouth();
 	void fillEast();
-	void fillWest();
+	void fillWest();	
+	void fillNorthEast();
+	void fillNorthWest();
+	void fillSouthEast();
+	void fillSouthWest();
+	void fillFirstRankAttacks();
+	
+	void fillFRDmasks();
 	
 	void fillSquares();
-	
+	void fillFiles();
+	void fillRanks();
 
-	inline BitBoard operator&(BitBoard b, Square s) {
+	inline BitBoard operator&(BitBoard b, Square s) 
+	{
 		assert(s >= SQ_A1 && s <= SQ_H8);
 		return b & SQUARES[s];
 	}
 
-	inline BitBoard operator|(BitBoard b, Square s) {
+	inline BitBoard operator|(BitBoard b, Square s) 
+	{
 		assert(s >= SQ_A1 && s <= SQ_H8);
 		return b | SQUARES[s];
 	}
 
-	inline BitBoard operator^(BitBoard b, Square s) {
+	inline BitBoard operator^(BitBoard b, Square s)
+	{
 		assert(s >= SQ_A1 && s <= SQ_H8);
 		return b ^ SQUARES[s];
 	}
 
-	inline BitBoard& operator|=(BitBoard& b, Square s) {
+	inline BitBoard& operator|=(BitBoard& b, Square s) 
+	{
 		assert(s >= SQ_A1 && s <= SQ_H8);
 		return b |= SQUARES[s];
 	}
 
-	inline BitBoard& operator^=(BitBoard& b, Square s) {
+	inline BitBoard& operator^=(BitBoard& b, Square s) 
+	{
 		assert(s >= SQ_A1 && s <= SQ_H8);
 		return b ^= SQUARES[s];
 	}
 
-}
+	inline BitBoard eastOne(BitBoard b)
+	{
+		return ((b << 1) & BBFILE_NOT_A);
+	} 
+	
+	inline BitBoard northeastOne(BitBoard b)
+	{
+		return ((b << 9) & BBFILE_NOT_A);
+	}
+	
+	inline BitBoard southeastOne(BitBoard b)
+	{
+		return ((b >> 7) & BBFILE_NOT_A);
+	}
 
+	inline BitBoard westOne(BitBoard b)
+	{
+		return ((b >> 1) & BBFILE_NOT_H);
+	}
+	inline BitBoard southwestOne(BitBoard b)
+	{
+		return ((b >> 9) & BBFILE_NOT_H);
+	}
+	inline BitBoard northwestOne(BitBoard b)
+	{
+		return ((b << 7) & BBFILE_NOT_H);
+	}
+
+}

@@ -27,6 +27,9 @@
     <ClInclude Include="bbtypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="movegen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bitboard.cpp">
@@ -39,6 +42,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="movegen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

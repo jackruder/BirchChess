@@ -118,12 +118,14 @@
     <ClInclude Include="bbtypes.h" />
     <ClInclude Include="bitboard.h" />
     <ClInclude Include="Move.h" />
+    <ClInclude Include="movegen.h" />
     <ClInclude Include="position.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bitboard.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Move.cpp" />
+    <ClCompile Include="movegen.cpp" />
     <ClCompile Include="position.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
