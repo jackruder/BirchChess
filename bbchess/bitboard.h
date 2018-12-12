@@ -50,7 +50,7 @@ namespace BitBoards
 	extern BitBoard FILEMASK[NUM_SQUARES];
 	extern BitBoard DIAGONALMASK[NUM_SQUARES];
 	extern BitBoard ANTIMASK[NUM_SQUARES];
-	extern uint8_t FIRSTRANKATTACKS[64*8];
+	extern uint8_t FIRSTRANKATTACKS[8 * 64];
 
 	//extern BitBoard ROOKMASKS[NUM_SQUARES];
 	//extern BitBoard BISHOPMASKS[NUM_SQUARES];

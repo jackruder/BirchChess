@@ -3,13 +3,20 @@
 #include <iostream>
 #include <string>
 #include <bitset>
+#include "movegen.h"
 
 int main()
 {
 	BitBoards::init();
-
-	for (int i = 0; i < 63; i++)
-		std::cout << std::bitset<8>(2 * i).to_string() << std::endl;
-	std::cin.ignore();
+	uint64_t hello = 534174112465763422ULL;
+	for (Square sq = SQ_A1; sq <= SQ_H8; ++sq)
+	{
+		std::cout << BitBoards::pretty(hello) << std::endl;
+		std::cout << BitBoards::pretty(BitBoards::rankAttacks(hello, sq)) << std::endl;
+		std::cout << BitBoards::pretty(BitBoards::fileAttacks(hello, sq)) << std::endl;
+		std::cout << BitBoards::pretty(BitBoards::diagonalAttacks(hello, sq)) << std::endl;
+		std::cout << BitBoards::pretty(BitBoards::antiAttacks(hello, sq)) << std::endl;
+		std::cin.ignore();
+	}
 	return 0;
 }

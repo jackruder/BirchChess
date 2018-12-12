@@ -1,7 +1,6 @@
 #include "movegen.h"
 
 
-
 //hyperbola quinessence attacks
 BitBoard BitBoards::diagonalAttacks(BitBoard occ, Square sq)
 {
@@ -15,7 +14,7 @@ BitBoard BitBoards::diagonalAttacks(BitBoard occ, Square sq)
 	return forward;
 }
 
-BitBoard BitBoards::antiAttakcs(BitBoard occ, Square sq)
+BitBoard BitBoards::antiAttacks(BitBoard occ, Square sq)
 {
 	BitBoard forward, reverse;
 	forward = occ & ANTIMASK[sq];
@@ -45,6 +44,8 @@ BitBoard BitBoards::rankAttacks(BitBoard occ, Square sq)
 	uint8_t file = sq & 7;
 	uint8_t r8 = sq & 56;
 	occ = (occ >> r8) & 126;
-	BitBoard attacks = FIRSTRANKATTACKS[occ * 4 + file];
+	BitBoard attacks = FIRSTRANKATTACKS[occ * 4 + file] << r8;
 	return attacks;
 }
+
+

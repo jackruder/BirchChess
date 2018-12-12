@@ -20,6 +20,7 @@ namespace BitBoards
 	BitBoard FILEMASK[NUM_SQUARES];
 	BitBoard DIAGONALMASK[NUM_SQUARES];
 	BitBoard ANTIMASK[NUM_SQUARES];
+
 	
 	//BitBoard ROOKMASKS[NUM_SQUARES];
 	//BitBoard BISHOPMASKS[NUM_SQUARES];
@@ -151,28 +152,29 @@ void BitBoards::fillSouthWest()
 
 void BitBoards::fillFirstRankAttacks()
 {
-	for (uint8_t occ = 0; occ < 128; occ += 2)
+	for (uint8_t occ = 0; occ < 64; ++occ)
 	{
 		for (File f = FILE_A; f <= FILE_H; ++f)
 		{
 			uint8_t buffer = 0;
 			for (int l = f - 1; l >= 0; --l)
-			{				
-				uint8_t piece = 1 << f;
+			{
+				uint8_t piece = 1 << l;
 				buffer |= piece;
-				if ((occ & piece) == piece) break;
+				if ((2 * occ & piece) == piece) break;
 			}
 
 			for (int r = f + 1; r <= 8; ++r)
 			{
-				uint8_t piece = 1 << f;
+				uint8_t piece = 1 << r;
 				buffer |= piece;
-				if ((occ & piece) == piece) break;
+				if ((2 * occ & piece) == piece) break;
 			}
 			FIRSTRANKATTACKS[8 * occ + f] = buffer;
 		}
 	}
 }
+
 
 void BitBoards::fillFRDmasks() //fill file, rook, diagonal/antidiagonal and queen masks
 {
@@ -197,8 +199,7 @@ void BitBoards::init()
 	fillRanks(); fillFiles(); fillSquares();
 	fillNorth(); fillSouth(); fillEast(); fillWest();
 	fillNorthEast(); fillNorthWest(); fillSouthEast(); fillSouthWest();
-	fillFRDmasks();
-	
+	fillFRDmasks(); fillFirstRankAttacks();	
 }
 
 const std::string BitBoards::pretty(BitBoard b) {
