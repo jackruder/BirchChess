@@ -23,6 +23,17 @@ enum PieceTypes {
 	NUM_PIECE_TYPES = 8
 };
 
+enum MoveType {  //from lsb to msb: 1st bit - promo; 2nd bit-captures; last two bits for special cases
+	QUIET, //no captures, no promotions 
+	PUSHTWO, //pawn move 2 squares, last two bits 01
+	CASTLE_KING, //last two bits 10
+	CASTLE_QUEEN, //last two bits 11
+	CAPTURE,
+	EN_PASSANT,  //Last bit is 1, is capture
+	PROMO_KN, PROMO_B, PROMO_R, PROMO_Q,    //KN = 00, B = 01, R = 10, Q = 11
+	CAP_PROMO_KN, CAP_PROMO_B, CAP_PROMO_R, CAP_PROMO_Q,
+};
+
 enum Square : int { //enum for algebraic sqare names LERF mapping
 	SQ_A1, SQ_B1, SQ_C1, SQ_D1, SQ_E1, SQ_F1, SQ_G1, SQ_H1,
 	SQ_A2, SQ_B2, SQ_C2, SQ_D2, SQ_E2, SQ_F2, SQ_G2, SQ_H2,

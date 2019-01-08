@@ -48,4 +48,52 @@ BitBoard BitBoards::rankAttacks(BitBoard occ, Square sq)
 	return attacks;
 }
 
+BitBoard BitBoards::wSinglePush(BitBoard wpawns, BitBoard empty)
+{
+	return northOne(wpawns) & empty;
+}
+
+BitBoard BitBoards::wDoublePush(BitBoard wpawns, BitBoard empty)
+{
+	const BitBoard r4 = 0x00000000FF000000ULL;
+	BitBoard push_one = wSinglePush(wpawns, empty);
+	return wSinglePush(push_one, empty) & empty & r4;
+}
+
+BitBoard BitBoards::bSinglePush(BitBoard bpawns, BitBoard empty)
+{
+	return southOne(bpawns) & empty;
+}
+
+BitBoard BitBoards::bDoublePush(BitBoard bpawns, BitBoard empty)
+{
+	const BitBoard r5 = 0x000000FF00000000ULL;
+	BitBoard push_one = bSinglePush(bpawns, empty);
+	return bSinglePush(push_one, empty) & empty & r5;
+}
+
+BitBoard BitBoards::wCanPushOne(BitBoard wpawns, BitBoard empty)
+{
+	return southOne(empty) & wpawns;
+}
+
+BitBoard BitBoards::wCanPushTwo(BitBoard wpawns, BitBoard empty)
+{
+	const BitBoard r4 = 0x00000000FF000000ULL;
+	BitBoard emptyR3 = southOne(empty & r4) & empty;
+	return wCanPushOne(wpawns, emptyR3);
+}
+
+BitBoard BitBoards::bCanPushOne(BitBoard bpawns, BitBoard empty)
+{
+	return northOne(empty) & bpawns;
+}
+
+BitBoard BitBoards::bCanPushTwo(BitBoard bpawns, BitBoard empty)
+{
+	const BitBoard r5 = 0x000000FF00000000ULL;
+	BitBoard emptyR6 = northOne(empty & r5) & empty;
+	return bCanPushOne(bpawns, emptyR6);
+}
+
 

@@ -106,6 +106,15 @@ namespace BitBoards
 		return b ^= SQUARES[s];
 	}
 
+	inline BitBoard northOne(BitBoard b)
+	{
+		return (b << 8);
+	}
+	
+	inline BitBoard southOne(BitBoard b)
+	{
+		return b >> 8;
+	}
 	inline BitBoard eastOne(BitBoard b)
 	{
 		return ((b << 1) & BBFILE_NOT_A);
