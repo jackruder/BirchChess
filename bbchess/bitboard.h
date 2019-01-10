@@ -51,6 +51,9 @@ namespace BitBoards
 	extern BitBoard DIAGONALMASK[NUM_SQUARES];
 	extern BitBoard ANTIMASK[NUM_SQUARES];
 	extern uint8_t FIRSTRANKATTACKS[8 * 64];
+	extern BitBoard KNIGHTMASK[NUM_SQUARES];
+	extern BitBoard KINGMASK[NUM_SQUARES];
+
 
 	//extern BitBoard ROOKMASKS[NUM_SQUARES];
 	//extern BitBoard BISHOPMASKS[NUM_SQUARES];
@@ -71,6 +74,9 @@ namespace BitBoards
 	void fillFirstRankAttacks();
 	
 	void fillFRDmasks();
+
+	void fillKnight();
+	void fillKing();
 	
 	void fillSquares();
 	void fillFiles();
@@ -105,6 +111,8 @@ namespace BitBoards
 		assert(s >= SQ_A1 && s <= SQ_H8);
 		return b ^= SQUARES[s];
 	}
+
+
 
 	inline BitBoard northOne(BitBoard b)
 	{

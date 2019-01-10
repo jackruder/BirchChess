@@ -20,7 +20,8 @@ namespace BitBoards
 	BitBoard FILEMASK[NUM_SQUARES];
 	BitBoard DIAGONALMASK[NUM_SQUARES];
 	BitBoard ANTIMASK[NUM_SQUARES];
-
+	BitBoard KNIGHTMASK[NUM_SQUARES];
+	BitBoard KINGMASK[NUM_SQUARES];
 	
 	//BitBoard ROOKMASKS[NUM_SQUARES];
 	//BitBoard BISHOPMASKS[NUM_SQUARES];
@@ -194,12 +195,42 @@ void BitBoards::fillFRDmasks() //fill file, rook, diagonal/antidiagonal and quee
 	}
 }
 
+void BitBoards::fillKnight()
+{
+	for (Square sq = SQ_A1; sq < SQ_H8; ++sq)
+	{
+		BitBoard east, west, attacks;
+		east = eastOne(sq);
+		west = westOne(sq);
+		attacks = (east | west) << 16;
+		attacks |= (east | west) >> 16;
+		east = eastOne(east);
+		west = westOne(west);
+		attacks |= (east | west) << 8;
+		attacks |= (east | west) >> 8;
+		KNIGHTMASK[sq] = attacks;
+	}
+}
+
+void BitBoards::fillKing()
+{
+	for (Square sq = SQ_A1; sq < SQ_H8; ++sq)
+	{
+		BitBoard king = sq;
+		BitBoard attacks = eastOne(sq) | westOne(sq);
+		king |= attacks;
+		attacks |= northOne(king) | southOne(king);
+		KINGMASK[sq] = attacks;
+	}
+}
+
 void BitBoards::init()
 {
 	fillRanks(); fillFiles(); fillSquares();
 	fillNorth(); fillSouth(); fillEast(); fillWest();
 	fillNorthEast(); fillNorthWest(); fillSouthEast(); fillSouthWest();
 	fillFRDmasks(); fillFirstRankAttacks();	
+	fillKnight(); fillKing();
 }
 
 const std::string BitBoards::pretty(BitBoard b) {
