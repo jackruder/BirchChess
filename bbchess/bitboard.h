@@ -111,8 +111,7 @@ namespace BitBoards
 		assert(s >= SQ_A1 && s <= SQ_H8);
 		return b ^= SQUARES[s];
 	}
-
-
+	
 
 	inline BitBoard northOne(BitBoard b)
 	{

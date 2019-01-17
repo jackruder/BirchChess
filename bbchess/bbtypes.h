@@ -16,7 +16,7 @@ enum Piece { //enum for piece names
 	NUM_PIECES = 16
 };
 
-enum PieceTypes {
+enum PieceType {
 	
 	NO_PIECE_TYPE = 0, PAWN, KNIGHT, BISHOP, ROOK, QUEEN, KING,
 	ALL_PIECES = 0,
@@ -97,7 +97,7 @@ inline T& operator*=(T& d, int i) { return d = T(int(d) * i); }		 \
 inline T& operator/=(T& d, int i) { return d = T(int(d) / i); } 
 
 OVERLOAD_ALL(Direction)
-OVERLOAD_INC(PieceTypes)
+OVERLOAD_INC(PieceType)
 OVERLOAD_INC(Piece)
 OVERLOAD_INC(Color)
 OVERLOAD_INC(Square)
@@ -116,8 +116,8 @@ constexpr Color operator~(Color c) { return Color(c^1); }
 //gets square at location specified by file and RANKS
 constexpr Square get_square(File f, Rank r) { return Square((r << 3) + f); } //n << 3 = 2^3 * n 
 
-constexpr Piece get_piece(PieceTypes t, Color c) { return Piece((c << 3) + t); } //gets piece of a certain color and type
-constexpr PieceTypes get_ptype(Piece p) { return PieceTypes(p & 7); }
+constexpr Piece get_piece(PieceType t, Color c) { return Piece((c << 3) + t); } //gets piece of a certain color and type
+constexpr PieceType get_ptype(Piece p) { return PieceType(p & 7); }
 
 inline Color get_color(Piece p) //finds color of a piece 
 {

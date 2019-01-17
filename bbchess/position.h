@@ -1,6 +1,6 @@
 #pragma once
 #include "bbtypes.h"
-
+#include "Move.h"
 class position
 {
 
@@ -15,7 +15,7 @@ private:
 	
 public:
 	
-	 
+	void updateMake(ExtMove m);
 	
 	inline BitBoard getAll() //gets the bitboard containing all occupied squares
 	{
@@ -27,7 +27,7 @@ public:
 		return ~(colorsBB[0] & colorsBB[1]);
 	}
 	
-	inline BitBoard getSet(PieceTypes ptype, Color c)
+	inline BitBoard getSet(PieceType ptype, Color c)
 	{
 		return ptypeBB[ptype] & colorsBB[c];
 	}
