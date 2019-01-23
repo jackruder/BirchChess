@@ -57,6 +57,10 @@ void Move::setFlags(int flags)
 	_move |= (flags & 0x0f) << 12;
 
 }
+bool Move::isQuiet() const
+{
+	return ((_move >> 12) == 0);
+}
 bool Move::isCapture() const
 {
 	return ((_move & 0x2000) >> 13) == 1;
@@ -107,6 +111,3 @@ int ExtMove::getCapturedPieceTypeColor() const  //This will return white by defa
 {
 	return (_ext >> 4) & 0x08;
 }
-
-
-

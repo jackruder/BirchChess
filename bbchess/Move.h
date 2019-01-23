@@ -17,7 +17,7 @@ public:
 	void setFrom(int from);
 	void setTo(int to);
 	void setFlags(int flags);
-
+	bool isQuiet() const;
 	bool isCapture() const; //sees if move is a capture
 
 };

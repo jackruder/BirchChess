@@ -44,12 +44,12 @@ BitBoard BitBoards::rankAttacks(BitBoard occ, Square sq)
 	uint8_t file = sq & 7;
 	uint8_t r8 = sq & 56;
 	occ = (occ >> r8) & 126;
-	BitBoard attacks = FIRSTRANKATTACKS[occ * 4 + file] << r8;
+	BitBoard attacks = BitBoard(FIRSTRANKATTACKS[occ * 4 + file]) << r8;
 	return attacks;
 }
 
 BitBoard BitBoards::wpSinglePush(BitBoard wpawns, BitBoard empty)
-{
+{ 
 	return northOne(wpawns) & empty;
 }
 
