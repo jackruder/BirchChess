@@ -18,5 +18,8 @@ int main()
 		std::cout << BitBoards::pretty(BitBoards::antiAttacks(hello, sq)) << std::endl;
 		std::cin.ignore();
 	}
+
+
+
 	return 0;
 }

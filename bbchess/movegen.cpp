@@ -96,4 +96,19 @@ BitBoard BitBoards::bpCanPushTwo(BitBoard bpawns, BitBoard empty)
 	return bpCanPushOne(bpawns, emptyR6);
 }
 
+BitBoard BitBoards::knightAttacks(BitBoard knights)
+{
+	BitBoard east, west, attacks;
+	east = eastOne(knights);
+	west = westOne(knights);
+	attacks = (east | west) << 16;
+	attacks |= (east | west) >> 16;
+	east = eastOne(east);
+	west = westOne(west);
+	attacks |= (east | west) << 8;
+	attacks |= (east | west) >> 8;
+	return attacks;
+}
+
+
 

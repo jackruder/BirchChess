@@ -7,7 +7,6 @@ namespace BitBoards
 	BitBoard antiAttacks(BitBoard occ, Square sq);
 	BitBoard fileAttacks(BitBoard occ, Square sq);
 	BitBoard rankAttacks(BitBoard occ, Square sq);
-
 	//pawn stuff
 	//pushes
 	BitBoard wpSinglePush(BitBoard wpawns, BitBoard empty);
@@ -45,7 +44,9 @@ namespace BitBoards
 	inline BitBoard rookAttacks(BitBoard occ, Square sq) { return fileAttacks(occ, sq) | rankAttacks(occ, sq); }
 	inline BitBoard bishopAttacks(BitBoard occ, Square sq) { return diagonalAttacks(occ, sq) | antiAttacks(occ, sq);}
 	inline BitBoard queenAttacks(BitBoard occ, Square sq) { return fileAttacks(occ, sq) | rankAttacks(occ, sq) | diagonalAttacks(occ, sq) | antiAttacks(occ, sq); }
-
+	BitBoard knightAttacks(BitBoard knights);
+	
+	
 }
 
 

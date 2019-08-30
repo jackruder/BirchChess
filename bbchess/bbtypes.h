@@ -68,7 +68,6 @@ enum Direction : int {  //enum defining cardinal bitboard directions
 };
 
 
-
 //allows adding a direction to a square to find new square
 constexpr Square operator+(Square s, Direction d) { return Square(int(s) + int(d)); }
 constexpr Square operator-(Square s, Direction d) { return Square(int(s) - int(d)); }
@@ -121,7 +120,7 @@ constexpr PieceType get_ptype(Piece p) { return PieceType(p & 7); }
 
 inline Color get_color(Piece p) //finds color of a piece 
 {
-	assert(p != NO_PIECE); //cant get type of null piece
+ 	assert(p != NO_PIECE); //cant get type of null piece
 	return Color(p >> 3);
 }
 

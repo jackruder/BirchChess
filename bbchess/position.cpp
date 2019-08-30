@@ -1,8 +1,22 @@
 #include "position.h"
 
-void position::updateMake(ExtMove m)
+Position::Position(const std::string fen)
 {
+	//for now we keep the game to pawns only
+	//loop pawns
+	//loop knights
 	
+	//ptypeBB[PAWN] = ;
+	//colorsBB[WHITE] = ;
+	//colorsBB[BLACK] = ;
+	//rule50 = 0;
+	
+	
+}
+
+void Position::updateMake(ExtMove m)
+{
+	//firstly the pieces need to be moved, calculations are done later
 	int move = m.getFlags();
 	BitBoard fromBB = 1ULL << m.getFrom();
 	BitBoard toBB = 1ULL < m.getTo();
@@ -13,6 +27,7 @@ void position::updateMake(ExtMove m)
 		
 		ptypeBB[m.getMovingPieceType()] ^= from_to;
 		colorsBB[m.getMovingPieceColor()] ^= from_to;
+		rule50 += 1;
 
 	case PUSHTWO:
 	
@@ -92,5 +107,12 @@ void position::updateMake(ExtMove m)
 		colorsBB[m.getMovingPieceColor()] ^= from_to;
 
 	}
+
+
+}
+
+BitBoard Position::attackedBy(Square sq) const
+{
+	return BitBoard();
 }
      

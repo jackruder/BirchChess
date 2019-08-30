@@ -14,8 +14,9 @@ namespace BitBoards
 
 	//Files
 	constexpr BitBoard BBFILE_A = 0x0101010101010101ULL;
+	constexpr BitBoard BBFILE_H = BBFILE_A << 7;
 	constexpr BitBoard BBFILE_NOT_A = ~BBFILE_A;
-	constexpr BitBoard BBFILE_NOT_H = ~(BBFILE_A << 7);
+	constexpr BitBoard BBFILE_NOT_H = ~(BBFILE_H);
 
 
 	//RANKS
